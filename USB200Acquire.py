@@ -28,3 +28,7 @@ print spec.wavelengths()
 #write the intensities captured by the spectrometer to the opened file
 f.write(spec.intensities())
 print spec.intensities()
+
+#write the spectrum captured by the spectrometer to the opened file
+f.write(spec.spectrum())
+print spec.spectrum
