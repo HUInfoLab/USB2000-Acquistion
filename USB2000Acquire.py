@@ -14,7 +14,7 @@ devices = sb.list_devices()
 spec = sb.Spectrometer(devices[0])
 
 #open file to write data to
-f = open('spectralCapture.txt', 'wb')
+f = open('spectralCapture.txt', 'w')
 
 #While True:
 	#intTime = input("What is your integration time")
@@ -22,13 +22,24 @@ f = open('spectralCapture.txt', 'wb')
 	#spec.integration_time_microsec(intTime)
 
 #write the wavelengths captured by the spectrometer to the opened file	
-f.write(spec.wavelengths())
-print spec.wavelengths()
+#f.write(spec.wavelengths())
+#print spec.wavelengths()
+wavelengthArray = spec.wavelengths()
+intensityArray = spec.intensities()
+
+
+for x in range(0, len(wavelengthArray)):
+	f.write(str(wavelengthArray[x]))
+	f.write(',')
+	f.write(str(intensityArray[x]))
+	f.write('\n')
 
 #write the intensities captured by the spectrometer to the opened file
-f.write(spec.intensities())
-print spec.intensities()
+#f.write(spec.intensities())
+#print spec.intensities()
 
 #write the spectrum captured by the spectrometer to the opened file
-f.write(spec.spectrum())
-print spec.spectrum
+#f.write(spec.spectrum())
+#print spec.spectrum
+
+f.close()
