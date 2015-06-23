@@ -1,3 +1,11 @@
+import time
+ts = time.time()
+
+#import datetime module to timestamp all data being collected 
+import datetime
+st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+
+
 #import the seabreeze library to interact with Ocean Optics Spectrometers 
 import seabreeze
 
@@ -24,22 +32,47 @@ f = open('spectralCapture.txt', 'w')
 #write the wavelengths captured by the spectrometer to the opened file	
 #f.write(spec.wavelengths())
 #print spec.wavelengths()
-wavelengthArray = spec.wavelengths()
-intensityArray = spec.intensities()
+
+try:
+	while True:
+		wavelengthArray = spec.wavelengths()
+		intensityArray = spec.intensities()
+
+		f.write(str(st))
+		f.write('\n')
+
+		for x in range(0, len(wavelengthArray)):
+			f.write(str(wavelengthArray[x]))
+			f.write(',')
+			f.write(str(intensityArray[x]))
+			f.write('\n')
+		print("Data collected")
+		time.sleep(3)	
+except KeyboardInterrupt:
+	print("We closed")
+	f.close()
 
 
-for x in range(0, len(wavelengthArray)):
-	f.write(str(wavelengthArray[x]))
-	f.write(',')
-	f.write(str(intensityArray[x]))
-	f.write('\n')
+# while True:
+    # var = input("Start Data collecting with an input of 2: ")
+    # if not var:
+        # continue
 
-#write the intensities captured by the spectrometer to the opened file
-#f.write(spec.intensities())
-#print spec.intensities()
+    # try:
+        # while var == 2: 
+			# # wavelengthArray = spec.wavelengths()
+			# # intensityArray = spec.intensities()
 
-#write the spectrum captured by the spectrometer to the opened file
-#f.write(spec.spectrum())
-#print spec.spectrum
+			# # f.write(str(st))
+			# # f.write('\n')
 
-f.close()
+			# # for x in range(0, len(wavelengthArray)):
+				# # f.write(str(wavelengthArray[x]))
+				# # f.write(',')
+				# # f.write(str(intensityArray[x]))
+				# # f.write('\n')
+	
+			# # time.sleep(3)		
+	# except KeyboardInterrupt:
+		# f.close()
+        
