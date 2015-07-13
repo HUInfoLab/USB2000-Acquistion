@@ -22,15 +22,14 @@ devices = sb.list_devices()
 spec = sb.Spectrometer(devices[0])
 
 #open file to write data to
-f = open('data/spectralCapture' + st +'.txt', 'w')
+#f = open('data/spectralCapture' + st +'.txt', 'w')
 
 #define capture function to be called on button press
-def capture_spectrum():
-	wavelengthArray = spec.wavelengths()
-	intensityArray = spec.intensities()
+def capture_spectrum(f):
 	
-	f.write(str(st))
-	f.write('\n')
+	wavelengthArray = spec.wavelengths()
+	intensityArray = spec.intensities()		
+	
 	
 	for x in range(0, len(wavelengthArray)):
 			f.write(str(wavelengthArray[x]))
